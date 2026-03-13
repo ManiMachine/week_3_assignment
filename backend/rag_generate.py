@@ -125,7 +125,6 @@ class RAGGenerator:
 
         # 5. Store base URL
         self.openrouter_base_url = "https://openrouter.ai/api/v1"
-        pass
     
     def refine_query(self, query: str) -> str:
         """
@@ -196,7 +195,6 @@ class RAGGenerator:
 
         except Exception:
             return query
-        pass
     
     def _format_context(self, results: list[RetrievalResult]) -> str:
         """
@@ -243,7 +241,6 @@ class RAGGenerator:
             formatted_sources.append(formatted)
 
         return "\n".join(formatted_sources)
-        pass
     
     def _build_sources_metadata(self, results: list[RetrievalResult]) -> list[dict]:
         """
@@ -293,7 +290,6 @@ class RAGGenerator:
 
         # 3. Return list of unique sources
         return list(seen.values())
-        pass
     
     def _call_llm(self, query: str, context: str) -> str:
         """
@@ -379,7 +375,6 @@ class RAGGenerator:
         answer = response_json["choices"][0]["message"]["content"]
 
         return answer
-        pass
     
     def generate(self, query: str, top_k: Optional[int] = None, return_sources: bool = True) -> dict:
         """
@@ -451,7 +446,6 @@ class RAGGenerator:
             "answer": answer,
             "sources": self._build_sources_metadata(results) if return_sources else []
         }
-        pass
 
 
 # =============================================================================

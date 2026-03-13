@@ -90,7 +90,6 @@ class OpenRouterEmbedder:
         self.base_url = "https://openrouter.ai/api/v1"
 
 
-        pass
     
     def embed_query(self, text: str) -> np.ndarray:
         """
@@ -350,7 +349,7 @@ class RetrievalPipeline:
         # 7. Store the config
         self.config = config
 
-        pass
+        
     
     def semantic_search(self, query: str, top_k: int = 30) -> list[dict]:
         """
@@ -389,12 +388,19 @@ class RetrievalPipeline:
         query_embedding = self.embedder.embed_query(query)
 
         # 2. Search Qdrant
-        results = self.qdrant.query_points(
-            collection_name=COLLECTION_NAME,
-            query=query_embedding.tolist(),
-            limit=top_k,
-            with_payload=True
-        ).points
+        try:
+            print(f"DEBUG: Querying Qdrant with collection: {COLLECTION_NAME}")
+            print(f"DEBUG: Query embedding shape: {query_embedding.shape}")
+            results = self.qdrant.query_points(
+                collection_name=COLLECTION_NAME,
+                query=query_embedding.tolist(),
+                limit=top_k,
+                with_payload=True
+            ).points
+            print(f"DEBUG: Qdrant results: {len(results) if results else 0}")
+        except Exception as e:
+            print(f"DEBUG: Qdrant error: {str(e)}")
+            raise
 
         # 3. Convert to list of dicts
         return [
