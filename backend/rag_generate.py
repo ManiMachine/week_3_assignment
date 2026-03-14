@@ -274,6 +274,8 @@ class RAGGenerator:
         """
             # 1. Track seen titles
         seen = {}
+        print(f"DEBUG: seen type: {type(seen)}")
+        print(f"DEBUG: seen initial: {seen}")
 
         # 2. Iterate through results
         for result in results:
@@ -288,8 +290,13 @@ class RAGGenerator:
                     "abstract_url": result.abstract_url,
                 }
 
-        # 3. Return list of unique sources
-        return list(seen.values())
+        # 3. Return dictionary of unique sources (so .values() works)
+        print(f"DEBUG: seen before values(): {type(seen)} - {seen}")
+        try:
+            return seen  # Return the dictionary, not list(seen.values())
+        except Exception as e:
+            print(f"DEBUG: Error in seen.values(): {type(seen)} - {str(e)}")
+            raise
     
     def _call_llm(self, query: str, context: str) -> str:
         """
