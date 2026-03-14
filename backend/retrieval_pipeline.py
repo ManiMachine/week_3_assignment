@@ -129,6 +129,8 @@ class OpenRouterEmbedder:
         }
         
         # 2. Build payload dict
+        print(f"DEBUG: Using model: {self.model}")
+        print(f"DEBUG: API URL: {self.base_url}/embeddings")
         payload = {
             "model": self.model,
             "input": text
