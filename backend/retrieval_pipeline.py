@@ -385,7 +385,9 @@ class RetrievalPipeline:
             List of result dicts with chunk_id, score, and payload
         """
         # 1. Embed the query
+        print(f"DEBUG: Starting semantic search for query: {query}")
         query_embedding = self.embedder.embed_query(query)
+        print(f"DEBUG: Generated embedding shape: {query_embedding.shape}")
 
         # 2. Search Qdrant
         try:
