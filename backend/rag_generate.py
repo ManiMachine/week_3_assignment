@@ -118,6 +118,8 @@ class RAGGenerator:
 
         # 3. Load OpenRouter API key
         self.openrouter_api_key = self.config.openrouter_api_key or os.getenv("OPENROUTER_API_KEY")
+        print(f"DEBUG: API key length: {len(self.openrouter_api_key) if self.openrouter_api_key else 'None'}")
+        print(f"DEBUG: API key starts with: {self.openrouter_api_key[:10] if self.openrouter_api_key else 'None'}...")
 
         # 4. Validate API key
         if not self.openrouter_api_key:
